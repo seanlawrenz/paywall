@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
-    "ejs": "^3.0.1",
-    "express": "^4.17.1",
-    "request": "^2.88.2"
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "cd server && nodemon index.js",
+    "start": "concurrently \"yarn server\" \"yarn client\""
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0"
   }
 }

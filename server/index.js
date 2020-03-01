@@ -3,8 +3,6 @@ const request = require('request');
 const cheerio = require('cheerio');
 const app = express();
 
-app.set('view engine', 'ejs');
-
 app.get('/', (req, res) => {
   const url = req.query.url ? req.query.url : null;
   if (url) {
@@ -15,10 +13,10 @@ app.get('/', (req, res) => {
         return;
       }
       const $ = cheerio.load(html);
-      const title = $('h1');
+      const title = $('h1').html();
       const data = $('[name=articleBody]').html();
       console.log(`Outputing from ${url}`);
-      res.render('article', { data, title });
+      res.json({ data, title });
     });
   } else {
     res.json({ error: 'URL Param not defined' });
