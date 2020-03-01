@@ -2,6 +2,7 @@ import fetch from 'cross-fetch';
 export const url = `http://localhost:8081/`;
 
 export const NYTRequest = async params => {
+  let data;
   try {
     const response = await fetch(`${url}?url=${params}`, {
       headers: {
@@ -10,11 +11,19 @@ export const NYTRequest = async params => {
       },
     });
     if (!response.ok) {
-      throw Error(response.statusText);
+      data = {
+        title: 'Problem Loading Article',
+        data: `<p>${response.statusText}</p>`,
+      };
+      return data;
     }
-    const data = await response.json();
+    data = await response.json();
     return data;
   } catch (err) {
-    console.error(err);
+    data = {
+      title: 'Problem Loading Article',
+      data: `<p>${err.message}</p>`,
+    };
+    return data;
   }
 };

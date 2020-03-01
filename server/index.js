@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     console.log(`Scraping from ${url}`);
     request(url, (err, response, html) => {
       if (err) {
-        res.json('error', { data: err });
+        res.status(404).send();
         return;
       }
       const $ = cheerio.load(html);
@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
       res.json({ data, title });
     });
   } else {
-    res.json({ error: 'URL Param not defined' });
+    res.status(400).send();
   }
 });
 

@@ -14,8 +14,12 @@ function App() {
   };
   const handleSubmit = async () => {
     setLoading(true);
-    const data = await NYTRequest(url);
-    setArticle(data);
+    try {
+      const data = await NYTRequest(url);
+      setArticle(data);
+    } catch (e) {
+      setArticle({ data: e.message, title: 'Problem finding article' });
+    }
     setLoading(false);
   };
   return (
