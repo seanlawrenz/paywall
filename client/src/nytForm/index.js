@@ -9,7 +9,7 @@ export default function NytForm(props) {
     props.onSubmit();
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="mt-4">
       <div className="form-group">
         <label htmlFor="url">Url of NYT article</label>
         <input
