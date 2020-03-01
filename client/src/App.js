@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import NytForm from './nytForm';
 
 function App() {
+  const [url, setUrl] = useState('');
+  const handleChange = value => {
+    setUrl(value);
+  };
+  const handleSubmit = () => {
+    alert(`getting ${url}`);
+  };
   return (
     <div className="container">
-      <NytForm />
+      <NytForm url={url} onUrlChange={handleChange} onSubmit={handleSubmit} />
     </div>
   );
 }

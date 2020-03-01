@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function NytForm() {
-  const [url, setUrl] = useState('');
-
+export default function NytForm(props) {
+  const handleChange = event => {
+    props.onUrlChange(event.target.value);
+  };
   const handleSubmit = event => {
     event.preventDefault();
-    alert(`Submitting for ${url}`);
+    props.onSubmit();
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -15,8 +16,8 @@ export default function NytForm() {
           type="text"
           className="form-control"
           id="url"
-          value={url}
-          onChange={e => setUrl(e.target.value)}
+          value={props.url}
+          onChange={e => handleChange(e)}
         />
       </div>
       <button type="submit" className="btn btn-primary">
