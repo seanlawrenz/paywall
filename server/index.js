@@ -1,7 +1,14 @@
 const express = require('express');
 const request = require('request');
 const cheerio = require('cheerio');
+const cors = require('cors');
 const app = express();
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  })
+);
 
 app.get('/', (req, res) => {
   const url = req.query.url ? req.query.url : null;
