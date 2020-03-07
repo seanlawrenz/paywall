@@ -5,4 +5,5 @@ import NytForm from '../';
 test('renders the input', () => {
   const { getByLabelText } = render(<NytForm url="" />);
   getByLabelText(/url of NYT article/i);
+  getByLabelText(/Select a news source/i);
 });

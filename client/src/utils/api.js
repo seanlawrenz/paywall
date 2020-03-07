@@ -1,15 +1,18 @@
 import fetch from 'cross-fetch';
-export const url = `http://localhost:8081/`;
+export const apiUrl = `http://localhost:8081/`;
 
-export const NYTRequest = async params => {
+export const NYTRequest = async (url, newsSource) => {
   let data;
   try {
-    const response = await fetch(`${url}?url=${params}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    });
+    const response = await fetch(
+      `${apiUrl}?url=${url}&newsSource=${newsSource}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
     if (!response.ok) {
       data = {
         title: 'Problem Loading Article',

@@ -7,15 +7,19 @@ import { NYTRequest } from './utils/api';
 
 function App() {
   const [url, setUrl] = useState('');
+  const [newsSource, setNewsSource] = useState();
   const [loading, setLoading] = useState(false);
   const [article, setArticle] = useState(undefined);
   const handleChange = value => {
     setUrl(value);
   };
+  const onNewsSourceChange = value => {
+    setNewsSource(value);
+  };
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const data = await NYTRequest(url);
+      const data = await NYTRequest(url, newsSource);
       setArticle(data);
     } catch (e) {
       setArticle({ data: e.message, title: 'Problem finding article' });
@@ -24,7 +28,13 @@ function App() {
   };
   return (
     <div className="container">
-      <NytForm url={url} onUrlChange={handleChange} onSubmit={handleSubmit} />
+      <NytForm
+        url={url}
+        newsSource={newsSource}
+        onNewsSourceChange={onNewsSourceChange}
+        onUrlChange={handleChange}
+        onSubmit={handleSubmit}
+      />
       {loading && <Progress />}
       {!loading && article && (
         <Article article={article.data} title={article.title} />

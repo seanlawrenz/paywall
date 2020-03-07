@@ -1,6 +1,6 @@
 const express = require('express');
 const request = require('request');
-const cheerio = require('cheerio');
+const ScrapperService = require('./scrpperService');
 const cors = require('cors');
 const app = express();
 
@@ -11,7 +11,10 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-  const url = req.query.url ? req.query.url : null;
+  const {
+    query: { url, newsSource },
+  } = req;
+
   if (url) {
     console.log(`Scraping from ${url}`);
     request(url, (err, response, html) => {
@@ -19,9 +22,20 @@ app.get('/', (req, res) => {
         res.status(404).send();
         return;
       }
-      const $ = cheerio.load(html);
-      const title = $('h1').html();
-      const data = $('[name=articleBody]').html();
+      let scrapeData;
+      const scrapperService = new ScrapperService();
+      switch (newsSource) {
+        case 'nyt':
+          scrapeData = scrapperService.newYorkTimes(html);
+          break;
+        case 'columbusDispatch':
+          scrapeData = scrapperService.columbusDispatch(html);
+          break;
+        default:
+          res.status(404).send();
+          return;
+      }
+      const { data, title } = scrapeData;
       console.log(`Outputing from ${url}`);
       res.json({ data, title });
     });
