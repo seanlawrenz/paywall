@@ -27,7 +27,7 @@ function App() {
     setLoading(false);
   };
   return (
-    <div className="container">
+    <div className="container mb-5">
       <NytForm
         url={url}
         newsSource={newsSource}
