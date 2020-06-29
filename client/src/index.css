@@ -11,3 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #191d21;
+    color: #d3d3d3;
+  }
+
+  a {
+    color: #adadad;
+
+  }
+
+  .btn {
+    color: #d3d3d3;
+  }
+
+  .btn:hover {
+    color: #d3d3d3;
+  }
+
+  .btn-primary,
+  .bin-secondary,
+  .btn-info,
+  .btn-danger,
+  .btn-dark {
+    color: #d3d3d3;
+  }
+}
