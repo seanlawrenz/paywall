@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, wait } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import App from './App';
 import { NYTRequest as mockResponse } from './utils/api';
 
@@ -34,7 +34,7 @@ test('getting an article', async () => {
   fireEvent.click(getByText(/submit/i));
   getByTestId('progress-bar');
   expect(mockResponse).toHaveBeenCalledWith(testUrl, testSource);
-  await wait(() => {
+  await waitFor(() => {
     getByText(/testing/i);
   });
 });
@@ -49,7 +49,7 @@ test('error on getting an article', async () => {
     target: { value: testUrl },
   });
   fireEvent.click(getByText(/submit/i));
-  await wait(() => {
+  await waitFor(() => {
     getByText(/problem finding article/i);
     getByText(/server down/i);
   });
