@@ -31,6 +31,9 @@ app.get('/', (req, res) => {
         case 'columbusDispatch':
           scrapeData = scrapperService.columbusDispatch(html);
           break;
+        case 'washpo':
+          scrapeData = scrapperService.washingtonPost(html);
+          break;
         default:
           res.status(404).send();
           return;

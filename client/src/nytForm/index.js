@@ -26,6 +26,7 @@ export default function NytForm(props) {
         >
           <option defaultValue></option>
           <option value="nyt">New York Times</option>
+          <option value="washpo">Washington Post</option>
           <option value="columbusDispatch">Columbus Dispatch</option>
         </select>
       </div>

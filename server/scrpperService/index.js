@@ -8,10 +8,18 @@ class ScrapperService {
     return { title, data };
   }
 
+  washingtonPost(html) {
+    const $ = cheerio.load(html);
+    const title = $('h1').html();
+    const data = $('[data-qa="main"]').html();
+    return { title, data };
+  }
+
   columbusDispatch(html) {
     const $ = cheerio.load(html);
     const title = $('h1').html();
-    const data = $('.article-body').html();
+    console.log(html);
+    const data = $('article').html();
     return { title, data };
   }
 }
